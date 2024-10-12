@@ -17,7 +17,7 @@ This project introduced sql commands using a SQLite database stored directly in 
 * test_main.py - test script 
 
 ## ETL pipeline Overview:
-![alt text](271664601-b39b21b4-ccb4-4cc4-b262-7db34492c16d.png)
+![alt text](images/271664601-b39b21b4-ccb4-4cc4-b262-7db34492c16d.png)
 
 ## Preparation and usage
 1. Open codespaces 
@@ -27,18 +27,18 @@ This project introduced sql commands using a SQLite database stored directly in 
 
 ## Check format and test errors
 1. Format code `make format`
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 2. Lint code `make lint`
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 3. Test code `make test`
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 (alternatively, do all with `make all`)
 
 ## CRUD results:
-![alt text](image.png)
+![alt text](images/image.png)
 
 ## Database: 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
