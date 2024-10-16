@@ -2,61 +2,54 @@
 Transforms and Loads data into the local SQLite3 database
 """
 
-from databricks import sql
 from dotenv import load_dotenv
+from databricks import sql
 import csv
+import pandas as pd
 import os
 
 
-# load the csv file and insert into databricks database
-def load(dataset="data/nfl-wide-receivers.csv"):
-    """Transforms and Loads data into the local Databricks database"""
-
-    # prints the full working directory and path
-    print(os.getcwd())
+def load(dataset="data/nba-draft-2015.csv"):
+    """Transforms and Loads data into the local databricks database"""
+    df = pd.read_csv(dataset, delimiter=",", skiprows=1)
     load_dotenv()
-
-    payload = csv.reader(open(dataset, newline="", encoding="UTF-8"), delimiter=",")
-    # skips header row
-    next(payload)
-    host_name = os.getenv("SERVER_HOST")
-    token = os.getenv("ACCESS_TOKEN")
-    http = os.getenv("HTTP_PATH")
+    server_h = os.getenv("SERVER_HOSTNAME")
+    access_token = os.getenv("ACCESS_TOKEN")
+    # http_path = os.getenv("HTTP_PATH")
     with sql.connect(
-        server_hostname=host_name, http_path=http, access_token=token
+        server_hostname=server_h,
+        http_path="/sql/1.0/warehouses/2d6f41451e6394c0",
+        access_token=access_token,
     ) as connection:
         c = connection.cursor()
+        c.execute("SHOW TABLES FROM default LIKE 'jdc_draft_2015*'")
+        result = c.fetchall()
 
-        c.execute(
+        if not result:
+            c.execute(
+                """
+                CREATE TABLE IF NOT EXISTS jdc_draft_2015 (
+                    Player STRING,
+                    Position STRING,
+                    NameID STRING,
+                    DraftYear INT,
+                    ProjectedSPM DOUBLE,
+                    Superstar DOUBLE,
+                    Starter DOUBLE,
+                    RolePlayer DOUBLE,
+                    Bust DOUBLE
+                )
             """
-        CREATE TABLE IF NOT EXISTS jdc_nflReceivers 
-        (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        pfr_player_id TEXT,
-        player_name TEXT,
-        career_try FLOAT,
-        career_ranypa FLOAT,
-        career_wowy FLOAT,
-        bcs_rating FLOAT)
-        """
-        )
-        c.execute("SELECT * form jdg_nflReceivers")
+            )
+        c.execute("SELECT * from jdc_draft_2015")
         result = c.fetchall()
         if not result:
-            # insert
-            '''cursor.executemany(
-                """
-            INSERT INTO jdc_nflReceivers (
-            pfr_player_id,
-            player_name,
-            career_try,
-            career_ranypa,
-            career_wowy,
-            bcs_rating
-            ) VALUES (?,?, ?, ?, ?, ?)""",
-                payload,
-            )'''
+
+            for _, row in df.iterrows():
+                convert = tuple(row)
+                c.execute(f"INSERT INTO jdc_draft_2015 VALUES {convert}")
         c.close()
-    print("Successfully transformed and loaded to Databricks")
+    print("successfully loaded data into Databricks")
     return "success"
 
 
