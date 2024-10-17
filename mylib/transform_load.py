@@ -4,7 +4,6 @@ Transforms and Loads data into the local SQLite3 database
 
 from dotenv import load_dotenv
 from databricks import sql
-import csv
 import pandas as pd
 import os
 

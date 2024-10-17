@@ -13,14 +13,16 @@ def test_extract():
 
 def test_load():
     load_dotenv()
-    host_name = os.getenv("SERVER_HOST")
-    token = os.getenv("ACCESS_TOKEN")
-    http = os.getenv("HTTP_PATH")
+    server_h = os.getenv("SERVER_HOSTNAME")
+    access_token = os.getenv("ACCESS_TOKEN")
+    # http_path = os.getenv("HTTP_PATH")
     with sql.connect(
-        server_hostname=host_name, http_path=http, access_token=token
+        server_hostname=server_h,
+        http_path="/sql/1.0/warehouses/2d6f41451e6394c0",
+        access_token=access_token,
     ) as connection:
         c = connection.cursor()
-        c.execute("SELECT * from jdc_nflReceivers")
+        c.execute("SELECT * from jdc_draft_2015")
         result = c.fetchall()
         c.close()
     assert result is not None
