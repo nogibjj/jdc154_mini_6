@@ -11,6 +11,9 @@ on:
 jobs:
   init_build: 
     runs-on: ubuntu-latest 
+    env:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      SERVER_HOST: ${{ secrets.SERVER_HOST }}
     steps: 
        
       - uses: actions/checkout@v2 
