@@ -8,7 +8,7 @@ This project creates an ETL-Query pipeline utilizing a cloud service like Databr
 * ETL - extracts data from url (extract.py), transforms data for analysis, and loads data into Databricks SQL Warehouse (transform_load.py). This is accomplished by establishing a database connection to Databricks.
 * Performs complex queries like joins and aggregation. (query.py)
 * Tests each operation
-* CI/CD pipeline (github actions including secrets)
+* CI/CD pipeline (github actions including secrets) * *Note* My HTTP did not work as an env variable so it was directly pasted in to my code 
 * requirements.txt
 * Makefile
 * Dockerfile and devcontainer
@@ -16,7 +16,7 @@ This project creates an ETL-Query pipeline utilizing a cloud service like Databr
 * test_main.py - test script 
 
 ## Visualization of Process:
-![alt text](../../../../Users/jenny/AppData/Local/Temp/adflow.svg)
+![alt text](https://github.com/nogibjj/Jeremy_Tan_IDS706_Week6/raw/main/adflow.svg)
 
 ## Preparation and usage
 1. Open codespaces 
