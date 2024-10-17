@@ -2,7 +2,7 @@
 
 This project creates an ETL-Query pipeline utilizing a cloud service like Databricks, and performs CTE and aggregation operations to analyze the data. The ![dataset](https://github.com/fivethirtyeight/data/tree/master/nba-draft-2015) is imported as a csv and loaded into Databricks as jdc_draft_2015; it contains historical results of the NBA draft projection model, 2001-2015.
 
-[![cicd](https://github.com/nogibjj/jdc154_mini_5/actions/workflows/hello.yml/badge.svg)](https://github.com/nogibjj/jdc154_mini_5/actions/workflows/hello.yml)
+[![cicd](https://github.com/nogibjj/jdc154_mini_6/actions/workflows/hello.yml/badge.svg)](https://github.com/nogibjj/jdc154_mini_6/actions/workflows/hello.yml)
 
 ## Functionality and commands:
 * ETL - extracts data from url (extract.py), transforms data for analysis, and loads data into Databricks SQL Warehouse (transform_load.py). This is accomplished by establishing a database connection to Databricks.
@@ -27,13 +27,13 @@ This project creates an ETL-Query pipeline utilizing a cloud service like Databr
 
 ## Check format and test errors
 1. Format code `make format`
-
+![alt text](data/format.png)
 
 2. Lint code `make lint`
-
+![alt text](data/lint.png)
 
 3. Test code `make test`
-
+![alt text](data/test.png)
 
 (alternatively, do all with `make all`)
 
