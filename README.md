@@ -22,18 +22,18 @@ This project creates an ETL-Query pipeline utilizing a cloud service like Databr
 1. Open codespaces 
 2. Load repo to code spaces
 3. Wait for installation of all requirements in requirements.txt
-4. Make your own .env file to store your Databricks' secrets as it requires a conncection to be established to Databricks
+4. Make your own .env file to store your Databricks' secrets as it requires a connection to be established to Databricks
 3. Run main.py to load in database and run queries
 
 ## Check format and test errors
 1. Format code `make format`
-![alt text](data/format.png)
+![alt text](images/format.png)
 
 2. Lint code `make lint`
-![alt text](data/lint.png)
+![alt text](images/lint.png)
 
 3. Test code `make test`
-![alt text](data/test.png)
+![alt text](images/test.png)
 
 (alternatively, do all with `make all`)
 
@@ -54,7 +54,7 @@ This project creates an ETL-Query pipeline utilizing a cloud service like Databr
     ORDER BY Position, Superstar DESC
 
 ```
-This query uses a CTE (common table expression) to get the average robability of becoming a superstar player per position. I then join this with my main table, comparing each player's probability of becoming a superstar to their position's average, and only display players who have a probability higher than the average of their position. I then display the player in order by position and their superstar probability. 
+This query uses a CTE (common table expression) to get the average probability of becoming a superstar player per position using the 'WITH' clause and selecting the position and its average superstar probability, grouping by position. I then join this with my main table on the Position column so I can compare each player's probability of becoming a superstar to their position's average. I then only display players who have a probability higher than the average of their position. I order the players by position and their superstar probability in descending order. I also display the position's average so that we can see how much above average their probability is.  
 
 ![alt text](images/image.png)
 
